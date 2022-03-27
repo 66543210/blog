@@ -1,0 +1,669 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn4.iconfinder.com/data/icons/gaming-fill/320/pokeball_pokemon_gaming_gamer_game_video-256.png">
+  <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/gaming-fill/320/pokeball_pokemon_gaming_gamer_game_video-256.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="button">
+  <meta name="keywords" content="">
+  
+  <title>OC基础:UIWindow和UIViewController - Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"66543210.github.io","root":"/blog/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>HelloWorld</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/booknote/">
+                <i class="iconfont icon-user-fill"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OC基础:UIWindow和UIViewController">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-23 21:09" pubdate>
+        June 23, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OC基础:UIWindow和UIViewController</h1>
+            
+            <div class="markdown-body">
+              <ul>
+<li><p>UIWindow是一种特殊的UIView，通常在一个应用中只会有一个UIWindow。</p>
+</li>
+<li><p>在ios程序启动完成后，建立的第一个视图控件就是UIWindow，接着创建一个控制器的View，最后将控制器的View添加到UIWindow上，于是控制器的View就是显示到屏幕上了。</p>
+</li>
+<li><p>一个ios程序之所以能显示在屏幕上，完全是因为它有UIWindow。也就是说，没有UIWindow就看不到任何UI界面。</p>
+</li>
+</ul>
+<div class="code-wrapper"><pre class="line-numbers language-objective-c" data-language="objective-c"><code class="language-objective-c">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;
+    &#x2F;&#x2F; Override point for customization after application launch.
+
+    &#x2F;&#x2F; 1.创建窗口
+    self.window &#x3D; [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+
+    &#x2F;&#x2F; 2.加载storyboard文件，创建控制器
+    &#x2F;&#x2F; name:就是storyboard文件名
+    &#x2F;&#x2F; bundle:主bundle,传入nil，表示主bundle
+    UIStoryboard *storyboard &#x3D; [UIStoryboard storyboardWithName:@&quot;Main&quot; bundle:nil];
+
+    &#x2F;&#x2F; 通过storyboard对象创建控制器
+    &#x2F;&#x2F; instantiateInitialViewController：加载storyboard箭头指向的控制器
+    UIViewController *rootVc &#x3D; [storyboard instantiateInitialViewController];
+
+    &#x2F;&#x2F; 3.设置窗口的根控制器，并且显示窗口
+    self.window.rootViewController &#x3D; rootVc;
+
+    &#x2F;&#x2F; 4.显示窗口
+    [self.window makeKeyAndVisible];
+
+    return YES;
+&#125;</code></pre></div>
+
+
+
+<h2 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h2><p>画布视图</p>
+<p>常用方法属性及描述</p>
+<blockquote>
+<p><strong>ios坐标系统</strong><br>ios以<mark>左上角</mark>为坐标原点(0,0)，以原点向右侧为X轴正方向，原点下侧为Y轴正方向</p>
+<p>ios采用CGPoint来表示点在坐标系上X、Y位置。我们可以通过CGPointMake(x,y)来创建一个坐标点：CGPoint point = CGPointMake(80,40)</p>
+<p>同时，ios采用CGSize来表示视图的宽度和高度，即视图的大小。我们可以通过CGSizeMake(width,height)来创建一个矩形的大小，如CGSize size = CGSizeMake(144,72)将创建一个宽度为144，高度为72的矩形大小。</p>
+<p>而CGRect则是结合了CGPoint和CGSize，用来表示矩形的位置和大小。它的origin表示矩形左上角所在位置(CGPoint)，size表示矩形的大小(CGSize)。</p>
+<p>作者：丸_子<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c16c32c45862">https://www.jianshu.com/p/c16c32c45862</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<h4 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h4><h5 id="frame：描述当前视图在其父视图中的位置和大小。"><a href="#frame：描述当前视图在其父视图中的位置和大小。" class="headerlink" title="frame：描述当前视图在其父视图中的位置和大小。"></a>frame：描述当前视图在其父视图中的位置和大小。</h5><p>坐标系在是父视图</p>
+<blockquote>
+<p>The frame rectangle, which describes the view’s location and size in its superview’s coordinate system.</p>
+<p>描述view在其所归属的父view上的位置描述</p>
+</blockquote>
+<blockquote>
+<p>Changing the frame rectangle automatically redisplays the view without calling its <code>drawRect:</code>If you want UIKit to call the <a href="doc://com.apple.documentation/documentation/uikit/uiview/1622529-drawrect?language=objc"><code>drawRect:</code></a> method when the frame rectangle changes, set the <a href="doc://com.apple.documentation/documentation/uikit/uiview/1622619-contentmode?language=objc"><code>contentMode</code></a> property to <a href="doc://com.apple.documentation/documentation/uikit/uiviewcontentmode/uiviewcontentmoderedraw?language=objc"><code>UIViewContentModeRedraw</code></a>.</p>
+<p>当我们修改一个view的frame时，框架会自动重新显示视图无需手动调用 drawRect方法(新的frame将在视图上自动生效)</p>
+</blockquote>
+<h5 id="bounds：描述当前视图在其自身坐标系统中的位置和大小"><a href="#bounds：描述当前视图在其自身坐标系统中的位置和大小" class="headerlink" title="bounds：描述当前视图在其自身坐标系统中的位置和大小"></a>bounds：描述当前视图在其自身坐标系统中的位置和大小</h5><p>坐标系是自己</p>
+<blockquote>
+<p>The bounds rectangle, which describes the view’s location and size in its own coordinate system.</p>
+<p>描述其在自己的坐标系中的位置和大小</p>
+</blockquote>
+<img src="https://upload-images.jianshu.io/upload_images/154112-636352bd35d9594a.png?imageMogr2/auto-orient/strip|imageView2/2/w/987" srcset="/blog/img/loading.gif" lazyload alt="img" style="zoom:50%;" />
+
+<h5 id="center：描述当前视图的中心点在其父视图中的位置。"><a href="#center：描述当前视图的中心点在其父视图中的位置。" class="headerlink" title="center：描述当前视图的中心点在其父视图中的位置。"></a>center：描述当前视图的中心点在其父视图中的位置。</h5><blockquote>
+<p>The center point of the view’s frame rectangle.</p>
+<p>描述其在父视图中的中心位置</p>
+</blockquote>
+<p>center和frame的修改都会自动修改其他的相关属性，当需要移动一个view的位置时可以直接修改其center而其frame也会自动修改</p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><h5 id="addSubview"><a href="#addSubview" class="headerlink" title="addSubview:"></a>addSubview:</h5><p>添加子视图</p>
+<h5 id="bringSubviewToFront"><a href="#bringSubviewToFront" class="headerlink" title="bringSubviewToFront:"></a>bringSubviewToFront:</h5><p>把某个子视图拉到最前面来(在子视图数组的最后一个)</p>
+<h5 id="sendSubviewToBack"><a href="#sendSubviewToBack" class="headerlink" title="sendSubviewToBack:"></a>sendSubviewToBack:</h5><p>把某个子视图放到最后(在子视图数组的第一个)</p>
+<h5 id="removeFromSuperview"><a href="#removeFromSuperview" class="headerlink" title="removeFromSuperview"></a>removeFromSuperview</h5><p>把自己从父视图中移除</p>
+<p><font color=blue>如果把viewcontroller的rootView执行了removeFromSuperview后就视图调试器而言这个viewcontroller都没了</font></p>
+<h5 id="isDescendantOfView"><a href="#isDescendantOfView" class="headerlink" title="isDescendantOfView:"></a>isDescendantOfView:</h5><div class="code-wrapper"><pre class="line-numbers language-objective-c" data-language="objective-c"><code class="language-objective-c">- (BOOL)isDescendantOfView:(UIView *)view;</code></pre></div>
+
+<p><code>Descendant</code> 后裔</p>
+<p>判断自己是否为view的子视图</p>
+<h5 id="sizeToFit-和sizeThatFits"><a href="#sizeToFit-和sizeThatFits" class="headerlink" title="sizeToFit: 和sizeThatFits:"></a>sizeToFit: 和sizeThatFits:</h5><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">- (CGSize)sizeThatFits:(CGSize)size;
+- (void)sizeToFit;</code></pre></div>
+
+<p>sizeThatFits: 会计算出最优的 size 但是不会改变 自己的 size，而 sizeToFit: 会计算出最优的 size 而且会改变自己的 size。</p>
+<p><em><strong>当调用 sizeToFit 后会调用 sizeThatFits 方法来计算 UIView 的 bounds.size 然后改变 frame.size</strong></em></p>
+<p>一般UILabel使用来调整大小</p>
+<p>对于单行label差别不大，对于需要自动换行的有些区别</p>
+<p><img src="https://img-blog.csdn.net/20170820230557917?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHVhbmdmZWk3MTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" srcset="/blog/img/loading.gif" lazyload alt="这里写图片描述"></p>
+<h2 id="UIViewController"><a href="#UIViewController" class="headerlink" title="UIViewController"></a>UIViewController</h2><p>UIViewController有一个UIView根视图，而vc管理的就是这个根视图view的继承，子视图管理</p>
+<blockquote>
+<p>The view stored in this property represents the root view for the view controller’s view hierarchy. The default value of this property is <code>nil</code>.</p>
+<p>If you access this property and its value is currently <code>nil</code>, the view controller automatically calls the <a href="doc://com.apple.documentation/documentation/uikit/uiviewcontroller/1621454-loadview?language=objc"><code>loadView</code></a> method and returns the resulting view.</p>
+<p>UIViewController的view默认是nil，但当你调用它时会自动调用vc的loadView方法创建view并返回</p>
+</blockquote>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h4 id="presentingViewController和presentedViewController"><a href="#presentingViewController和presentedViewController" class="headerlink" title="presentingViewController和presentedViewController"></a>presentingViewController和presentedViewController</h4><p>presentingViewController表示呈现此视图控制器的视图控制器， presentedViewController表示视图控制器由该视图控制器呈现</p>
+<p>A present B，A就是presentingViewController，B是presentedViewController，同时在执行present时<code>A.presentedViewController == B</code></p>
+<div style="background: gold;">需要注意的是presenting并不是指打开它的控制器，在某些情况下</div>
+
+<ul>
+<li>A</li>
+</ul>
+<img src="https://upload-images.jianshu.io/upload_images/1966717-054b2ffbe1f7358a.png?imageMogr2/auto-orient/strip|imageView2/2/w/852/format/webp" srcset="/blog/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
+
+<p>Ans: navigationController</p>
+<ul>
+<li><p>B</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1966717-40f1c832cdc313e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<p>Ans: tabbarController</p>
+</li>
+</ul>
+<p style="background:gold">在一个有导航控制器的控制器P中加入了子控制器Q，然后添加了Q的view，这个Q就可以使用self.navigationController进行跳转，Q是利用的P的导航控制器进行跳转。也就是说Q的关于控制器的操作都被P给处理了。那新加入一个问题：如果在Q中present出来一个界面R，那这个R的presentingViewController是谁呢？
+ 是的，是P。此时已经出现了刚才说的问题，Q打开了R，但是R的presentingViewController却是P。这时因为Q是P的子控制器。</p>
+
+<p><font color=red>当某个控制器有父控制器的时候，它的presentingViewController是父控制器的presentingViewController</font></p>
+<p>但！</p>
+<p>可以指定presentingViewController为打开它的控制器</p>
+<blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-css" data-language="css"><code class="language-css">@property(nonatomic,assign) BOOL definesPresentationContext;
+@property(nonatomic,assign) UIModalPresentationStyle modalPresentationStyle;</code></pre></div>
+
+<p>modalPresentationStyle属性决定了将要present的控制器以何种方式展现，默认值为UIModalTransitionStyleCoverVertical。如果把一个控制器的definesPresentationContext属性设置为YES，那么在需要进行UIModalPresentationCurrentContext类型的跳转的时候，UIKit会使用视图层级内的这个控制器来进行跳转。</p>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">avc.definesPresentationContext &#x3D; false
+avc.modalPresentationStyle &#x3D; .currentContext</code></pre></div>
+
+<p>作者：XueYongWei<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/dd6180bc340a">https://www.jianshu.com/p/dd6180bc340a</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<h4 id="navigationController"><a href="#navigationController" class="headerlink" title="navigationController"></a>navigationController</h4><blockquote>
+<p>The nearest ancestor in the view controller hierarchy that is a navigation controller.</p>
+<p>在vc继承树中最近的navigationController</p>
+<p>If the view controller or one of its ancestors is a child of a navigation controller, this property contains the owning navigation controller. This property is <code>nil</code> if the view controller is not embedded inside a navigation controller.</p>
+</blockquote>
+<h4 id="modalPresentationStyle"><a href="#modalPresentationStyle" class="headerlink" title="modalPresentationStyle"></a>modalPresentationStyle</h4><blockquote>
+<p>Presents a view controller modally.</p>
+<p>一般在使用presentViewController:animated:completion:时使用</p>
+</blockquote>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h4 id="viewWillAppear"><a href="#viewWillAppear" class="headerlink" title="viewWillAppear:"></a>viewWillAppear:</h4><blockquote>
+<p>Notifies the view controller that its view is about to be added to a view hierarchy.</p>
+<p>一个视图即将加到继承树上</p>
+</blockquote>
+<h4 id="viewDidAppear"><a href="#viewDidAppear" class="headerlink" title="viewDidAppear:"></a>viewDidAppear:</h4><blockquote>
+<p>Notifies the view controller that its view was added to a view hierarchy.</p>
+</blockquote>
+<hr>
+<p><code>loadView</code>：是开始加载<code>view</code>的起始方法，除非手动调用，否则在<code>ViewController</code>的生命周期中只调用一次。</p>
+<p><code>viewDidLoad</code>：是我们最常用的方法，类成员对象和变量的初始化我们都会放在这个方法中。在创建类后无论视图展现还是消失，这个方法也只会在布局是调用一次。</p>
+<p><code>viewWillAppear:(BOOL)animated</code>：方法 是在视图将要展现出来的时候调用。</p>
+<p><code>viewWillLayoutSubviews</code>：方法是在将要布局子视图的时候调用。</p>
+<p><code>viewDidLayoutSubviews</code>：方法是在子视图布局完成后调用。</p>
+<p><code>viewDidAppear:(BOOL)animated</code>：方法是视图已经出现。</p>
+<p><code>viewWillDisappear:(BOOL)animated</code>：方法是视图即将消失。</p>
+<p><code>viewDidDisappear:(BOOL)animated</code>：视图已经消失。</p>
+<p><code>dealloc</code>：<code>ViewController</code>被释放时调用。</p>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="dismissViewControllerAnimated"><a href="#dismissViewControllerAnimated" class="headerlink" title="dismissViewControllerAnimated"></a>dismissViewControllerAnimated</h4><blockquote>
+<p>Dismisses the view controller that was presented modally by the view controller.</p>
+<p>退出模态</p>
+</blockquote>
+<p><mark color=pink>dismissViewControllerAnimated应该遵循谁present谁dimiss，类似MVC中的谁创建谁治理，因此应该是由present出它的vc进行dismiss</mark></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/dd6180bc340a">https://www.jianshu.com/p/dd6180bc340a</a></p>
+<p>但在日常开发中基本都是presented的vc自己dismiss，只是因为iOS系统做了优化，如果一个vc执行了dismiss时，且它没有presented的vc那么就会让它的presentingvc执行dismiss；若其有presented的vc那么就会把其presented的vc移除</p>
+<p>需要注意的是如果A present B，B present C，… ， 一直到E，即A-&gt;B-&gt;C-&gt;D-&gt;E;</p>
+<p>此时若A 执行了dismissView… 那么BCDE都会被dismiss掉，执行顺序为E-&gt;D-&gt;C-&gt;B</p>
+<p>这个过程就很有递归的感觉，已知dismiss一个vc时需要把他上面的vc都dismiss掉，所以过程上有点类似于</p>
+<div class="code-wrapper"><pre class="line-numbers language-objective-c" data-language="objective-c"><code class="language-objective-c">- (void) myDissmiss: vc &#123;
+    if(vc.presetedViewController &#x3D;&#x3D; nil) &#123;
+        [vc.presentingViewController dismiss];
+        return;
+    &#125;
+	if (vc.presentedViewController) &#123;
+		myDissmiss(vc.presentedViewController)
+	&#125;
+    
+&#125;</code></pre></div>
+
+<img src="https://upload-images.jianshu.io/upload_images/141604-f5a367e9bbfcaf10.png?imageMogr2/auto-orient/strip|imageView2/2/w/751" srcset="/blog/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
+<p>可恶原来 [self dismiss…]的本质是present它的上层执行dissmiss啊</p>
+<h4 id="presentViewController-animated-completion"><a href="#presentViewController-animated-completion" class="headerlink" title="presentViewController:animated:completion:"></a>presentViewController:animated:completion:</h4><blockquote>
+<p>Presents a view controller modally.</p>
+<p>添加模态</p>
+</blockquote>
+<h2 id="UINavigationController"><a href="#UINavigationController" class="headerlink" title="UINavigationController"></a>UINavigationController</h2><blockquote>
+<p>A container view controller that defines a stack-based scheme for navigating hierarchical content.</p>
+<p>基于栈模式的视图控制器容器</p>
+</blockquote>
+<p>UINavigationController 即导航控制器是一个用于控制视图页面切换的一个类</p>
+<blockquote>
+<p>UINavigationController(导航控制器)是一个容器控制器, 其内部展示着多个UIViewController(视图控制器)的内容, 我们可以通过UINavigationController的view属性获取到其自身的视图, 在该视图上有一个位于界面顶部的UINavigationBar(导航栏)和位于界面底部的默认隐藏的UIToolbar(工具栏), 以及一个位于界面中间部分的UIViewController的view<br>作者：蚊香酱<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903463868956679">https://juejin.cn/post/6844903463868956679</a><br>来源：掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<img src="https://user-gold-cdn.xitu.io/2017/2/16/d2ce61d3cefb842b258892a326174054?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" srcset="/blog/img/loading.gif" lazyload alt="img" style="zoom:50%;" />
+
+<p><img src="https://user-gold-cdn.xitu.io/2017/2/16/0ce5a3e61c83a23812c2765421534aff?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" srcset="/blog/img/loading.gif" lazyload alt="img"></p>
+<h3 id="常用方法-2"><a href="#常用方法-2" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="pushViewController-animated"><a href="#pushViewController-animated" class="headerlink" title="pushViewController:animated:"></a>pushViewController:animated:</h4><h4 id="popViewControllerAnimated"><a href="#popViewControllerAnimated" class="headerlink" title="popViewControllerAnimated:"></a>popViewControllerAnimated:</h4>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/iOS/">iOS</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/59499.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">iOS存储-沙盒机制</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/21992.html">
+                        <span class="hidden-mobile">堆</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+      <script  src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js" ></script>
+      <script  src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js" ></script>
+      
+        <script  src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+      
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

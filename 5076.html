@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn4.iconfinder.com/data/icons/gaming-fill/320/pokeball_pokemon_gaming_gamer_game_video-256.png">
+  <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/gaming-fill/320/pokeball_pokemon_gaming_gamer_game_video-256.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="button">
+  <meta name="keywords" content="">
+  
+  <title>算法前置C++容器篇 - Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/blog/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"66543210.github.io","root":"/blog/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/blog/">&nbsp;<strong>HelloWorld</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/booknote/">
+                <i class="iconfont icon-user-fill"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="算法前置C++容器篇">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-08 19:27" pubdate>
+        September 8, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      56
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法前置C++容器篇</h1>
+            
+            <div class="markdown-body">
+              <div style='border-left: 5px solid #0d93ea; padding: 10px;background: #eee; color: #555'>在使用C++进行算法编写时，至少应当熟悉各个容器的使用，这样就不会在使用一种数据结构时总需要去查询容器的基础API方法</div>
+
+<h1 id="容器篇"><a href="#容器篇" class="headerlink" title="容器篇"></a>容器篇</h1><blockquote>
+<p>在使用各个容器前都需要引入各种的头文件，或者可以使用C++的万能头文件<code>#include&lt;bits/stdc++.h&gt;</code>避免麻烦</p>
+</blockquote>
+<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><p>vector头文件为<code>#include&lt;vector&gt;</code></p>
+<h3 id="常用初始化方法"><a href="#常用初始化方法" class="headerlink" title="常用初始化方法"></a>常用初始化方法</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vector&lt;int&gt;v; 						&#x2F;&#x2F; 创建空vector
+vector&lt;int&gt;v(10, 1);				&#x2F;&#x2F; 初始化10个1
+vector&lt;int&gt;v&#123;-1,-1&#125;;				&#x2F;&#x2F; 以-1，-1初始化元素
+int a[] &#x3D; &#123;-1, -1&#125;;
+vector&lt;int&gt;v(a, a+2);				&#x2F;&#x2F; 以数组初始化vector,参数发布为初始化范围的起止
+vector&lt;int&gt;v(vec.begin(), vec.end();&#x2F;&#x2F; 以另一个vector初始化一个vector
+
+&#x2F;&#x2F; 以上v为生成的vector变量，同时进行了一些初始化赋值，对应的也可以使用以下声明方式进行声明及初始化
+vector&lt;int&gt;v &#x3D; vector&lt;int&gt;(10, 1);&#x2F;&#x2F; 初始化10个1</code></pre></div>
+
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">v.push_back(1);				&#x2F;&#x2F; 末尾追加元素
+v.insert(v.begin(), 1);		&#x2F;&#x2F; 在begin前插入新元素1，也就是首位插入1
+&#x2F;&#x2F; insert相关API
+insert(pos,elem);			&#x2F;&#x2F; 在迭代器pos位置前插入elem元素
+insert(pos,n,elem);			&#x2F;&#x2F; 在迭代器pos位置前插入n个elem元素
+insert(pos,first,last);		&#x2F;&#x2F; 在迭代器pos位置前插入其他容器(不限于vector)[first, last)的所有元素
+insert(pos,initlist);		&#x2F;&#x2F; 在迭代器pos指定位置前，插入初始化列表&#123;1,2,3,4&#125;
+&#x2F;&#x2F; 例，v.insert(v.end(), &#123; 10,11 &#125;);
+</code></pre></div>
+
+<p>在c++11中添加了emplace相关的api，经常可以在leetcode上看到题解使用的是emplace_back()追加元素而不是push_back();</p>
+<p>关于这两者在底层实现上有所区别，大概就是push体系在底层会先产生一个拷贝的中间临时变量值，而emplace体系则是直接在元素末尾创建这个值</p>
+<blockquote>
+<p>push_back() 向容器尾部添加元素时，首先会创建这个元素，然后再将这个元素拷贝或者移动到容器中（如果是拷贝的话，事后会自行销毁先前创建的这个元素）；而 emplace_back() 在实现时，则是直接在容器尾部创建这个元素，省去了拷贝或移动元素的过程。</p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/6826.html">http://c.biancheng.net/view/6826.html</a></p>
+</blockquote>
+<p>简单来说就是push_back的底层实现比emplace_back更繁琐，<font color=dark>emplace的执行效率更高，建议使用emplace体系(低版本c++不兼容，若要考虑兼容性还是用push)</font></p>
+<p><strong>C++11中添加的emplace体系</strong></p>
+<p>和push_back, push_front, insert对应的有emplace_back, emplace_front, emplace</p>
+<div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">v.emplace_back(1);			&#x2F;&#x2F; 末尾追加元素
+v.emplace_front(2);			&#x2F;&#x2F; 首位追加元素
+&#x2F;&#x2F; 和insert不同，emplace每次只能插入一个元素而不是多个
+v.emplace(v.begin(), 1);	&#x2F;&#x2F; 首位插入1</code></pre></div>
+
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">pop_back(); 		&#x2F;&#x2F;删除最后一个元素
+erase(pos);			&#x2F;&#x2F; 删除迭代器pos位置的元素
+erase(begin, end);	&#x2F;&#x2F; 删除[begin, end) 迭代器区域内的内容
+clear();			&#x2F;&#x2F; 删除所以元素</code></pre></div>
+
+<p>另外还有在算法库&lt;algorithm.h&gt;中的remove()方法可以删除容器在的元素</p>
+<blockquote>
+<p>STL中remove()只是将待删除元素之后的元素移动到vector的前端，而不是删除。若要真正移除，需要搭配使用erase()。</p>
+</blockquote>
+<p>==使用场景==</p>
+<div style='border-left: 5px solid #FFA500; padding: 10px;background: #F5F5F5; color: #555'>因为在多元素遍历情况下删除时，使用erase会产生迭代器野指针问题，使用remove后会返回移动到末尾的要删除的元素迭代器起始位置，因此可以使用一些代码，配合删除vector中的多个元素</div>
+
+<div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;algorithm&gt;
+vector&lt;int&gt;::iterator iter &#x3D; remove(v.begin(), v.end(), 3);
+v.erase(iter, v.end());</code></pre></div>
+
+<h3 id="改-amp-查"><a href="#改-amp-查" class="headerlink" title="改 &amp; 查"></a>改 &amp; 查</h3><p>修改容器内容有几种方法，利用删除和添加实现修改，在遍历中修改，直接基于下标修改</p>
+<div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">v[0] &#x3D; 1;	&#x2F;&#x2F; 修改下标为1的内容
+&#x2F;&#x2F; 迭代器修改
+vector&lt;int&gt;::iterator it &#x3D; find(v.begin(), v.end(), 6);
+if(it !&#x3D; v.end()) &#123;
+    *it &#x3D; 7;
+&#125;
+
+v.back(); &#x2F;&#x2F; 放回v的最后一个元素
+v.front(); &#x2F;&#x2F;返回v的第一个元素
+
+&#x2F;&#x2F; 容器大小
+v.size();</code></pre></div>
+
+<p>vector本身没有查找相关的api，需要借用算法库<code>algorithm.h</code>中的find方法</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;int&gt;::iterator it &#x3D; find(v.begin(), v.end(), 6);
+&#x2F;&#x2F; 若it &#x3D;&#x3D; v.end(); 表示找不到该元素</code></pre></div>
+
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 基于下标遍历
+for (int i &#x3D; 0, len &#x3D; v.size(); i &lt; len; i++) &#123;
+    cout&lt;&lt;v[i]&lt;&lt;endl;
+&#125;
+&#x2F;&#x2F; 基于迭代器遍历
+vector&lt;int&gt;::iterator it; &#x2F;&#x2F; 迭代器的声明
+for(it &#x3D; v.begin(); it !&#x3D; v.end(); it++) &#123;
+    cout&lt;&lt;*it&lt;&lt;endl;
+&#125;
+&#x2F;&#x2F; for in
+for (int x : v) &#123;
+    cout&lt;&lt;x&lt;&lt;endl;
+&#125;</code></pre></div>
+
+<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a><span id="queue">Queue</span></h2><p>对应头文件为<code>#include&lt;queue&gt;</code></p>
+<p>queue表示的是队列结构，具有先进先出的特性</p>
+<h3 id="常用初始化方法-1"><a href="#常用初始化方法-1" class="headerlink" title="常用初始化方法"></a>常用初始化方法</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;queue&gt;
+queue&lt;int&gt; q; &#x2F;&#x2F;初始化一个空队列
+queue&lt;int&gt; qq &#x3D; queue&lt;int&gt;();&#x2F;&#x2F;初始化一个空队列
+queue&lt;int&gt;copy_q &#123;q&#125;; &#x2F;&#x2F;拷贝容器q生成copy_q队列</code></pre></div>
+
+<h3 id="增-1"><a href="#增-1" class="headerlink" title="增"></a>增</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 队列末尾添加元素
+q.push();
+q.emplace();</code></pre></div>
+
+<h3 id="删-1"><a href="#删-1" class="headerlink" title="删"></a>删</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 从队首删除一个元素,需要注意容器目前是否还有元素
+q.pop();</code></pre></div>
+
+<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 若出现需要随机访问队列中间元素时需要考虑当前场景是否应该使用vector
+q.back(); &#x2F;&#x2F;队尾元素
+q.front(); &#x2F;&#x2F;队头元素
+
+&#x2F;&#x2F; 容器大小
+q.size();
+&#x2F;&#x2F; 容器是否为空
+q.empty(); &#x2F;&#x2F; 返回bool型标识是否为空</code></pre></div>
+
+<h3 id="遍历-1"><a href="#遍历-1" class="headerlink" title="遍历"></a>遍历</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 在遍历时同时执行出队操作
+while(!q.empty()) &#123;
+    cout&lt;&lt;q.front();
+    q.pop_front();
+&#125;</code></pre></div>
+
+<h3 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h3><blockquote>
+<p>相似的容器有: <a href="#deque">deque</a>(双端队列), <a href="#priority_queue">priority_queue</a>(优先队列)</p>
+</blockquote>
+<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><p>头文件为<code>#include&lt;stack&gt;</code>，是一种先进后出的结构，栈</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">stack&lt;int&gt;sk; &#x2F;&#x2F; 初始化一个空栈
+&#x2F;&#x2F; stack不支持列表参数形式初始化，但可以通过第二个参数改变修改底层容器后就可以使用该容器初始化
+vector&lt;int&gt;v&#123;1,2,3,4&#125;;
+stack&lt;int, vector&lt;int&gt; &gt;sk(v); &#x2F;&#x2F; 指定底层容器为vector&lt;int&gt;类型，就可以使用vector&lt;int&gt;进行初始化</code></pre></div>
+
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; stack和queue一样基本是使用其先进后出和先进先出的逻辑，所以一般也不会用到在中间插值的操作
+&#x2F;&#x2F; 入栈
+sk.push(elem);
+&#x2F;&#x2F; 出栈
+sk.pop();
+&#x2F;&#x2F; 访问栈顶元素
+sk.top();
+&#x2F;&#x2F; 栈的大小
+sk.size();
+&#x2F;&#x2F; 判断栈是否为空
+sk.empty();
+&#x2F;&#x2F; 遍历
+&#x2F;&#x2F; 和queue一样，stack就不适合遍历，使用stack就是使用栈的特性，一般都是以empty()作为while判断条件然后循环出栈访问</code></pre></div>
+
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a><span id="set">Set</span></h2><p>对应头文件<code>#include&lt;set&gt;</code></p>
+<p>set即集合，内部每个元素都是唯一的</p>
+<h3 id="常见初始化"><a href="#常见初始化" class="headerlink" title="常见初始化"></a>常见初始化</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;set&gt;
+set&lt;int&gt; se; &#x2F;&#x2F; 定义一个空set
+set&lt;int&gt; se &#x3D; set&lt;int&gt;();&#x2F;&#x2F; 定义一个空set
+
+set&lt;int&gt;se(xset); &#x2F;&#x2F; 使用xset来初始化se
+set&lt;int&gt; se(a.begin(), a.end()); &#x2F;&#x2F; a可以是集合也可以是vector这种容器</code></pre></div>
+
+
+
+<h3 id="增-2"><a href="#增-2" class="headerlink" title="增"></a>增</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">se.insert(); &#x2F;&#x2F; 向集合添加一个元素
+se.insert(a.begin(), a.end()); &#x2F;&#x2F; 插入多个元素，a可以是vector或集合</code></pre></div>
+
+<h3 id="删-2"><a href="#删-2" class="headerlink" title="删"></a>删</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 删除容器中值为elem的元素
+se.erase(4);
+
+&#x2F;&#x2F; 任意位置删除一个元素
+set&lt;int&gt;::iterator it &#x3D; se.begin();
+se.erase(it);
+
+&#x2F;&#x2F; 清空所有元素
+st.clear();</code></pre></div>
+
+<h3 id="查-1"><a href="#查-1" class="headerlink" title="查"></a>查</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 集合大小
+se.size();
+&#x2F;&#x2F; 集合是否为空
+st.empty();
+&#x2F;&#x2F; 指定元素个数，由于set中的元素都唯一使用此处count常用来判断是否存在该值
+st.count(elem);
+&#x2F;&#x2F; 指定元素是否存在
+se.find(elm) &#x2F;&#x2F; 返回迭代器位置，通过和se.end()判断是否存在</code></pre></div>
+
+<h3 id="遍历-2"><a href="#遍历-2" class="headerlink" title="遍历"></a>遍历</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 迭代器遍历
+set&lt;int&gt;::iterator it;
+for (it &#x3D; se.begin(); it !&#x3D; se.end(); it++) &#123;
+	cout &lt;&lt; *it &lt;&lt; endl;
+&#125;
+
+&#x2F;&#x2F; for in
+for (int x : se) &#123;
+    cout&lt;&lt;x&lt;&lt;endl;
+&#125;</code></pre></div>
+
+
+
+<blockquote>
+<p>关联的容器有: <a href="#multiset">multiset</a></p>
+</blockquote>
+<h2 id="Pair"><a href="#Pair" class="headerlink" title="Pair"></a>Pair</h2><p>pair的使用不用特意引入头文件，pair表示一种键值对类型</p>
+<div style='border-left: 5px solid #0d93ea; padding: 10px;background: #eee; color: #555'>严格来说不算一种容器，也不在STL标准库中，不过实际应用场景很丰富，经常和其他容器搭配使用</div>
+
+<h3 id="初始化-1"><a href="#初始化-1" class="headerlink" title="初始化"></a>初始化</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">pair&lt;int, stirng&gt;pa; &#x2F;&#x2F; 定义一个key为int，value为string的键值对
+pair&lt;int, string&gt;pa(1, &quot;value1&quot;); &#x2F;&#x2F; 定义同时初始化赋值
+make_pair(3, &quot;value3&quot;); &#x2F;&#x2F; 创建一个新的pair，类型为&lt;int, string&gt;
+pair&lt;int, string&gt;pa &#x3D; &#123;5, &quot;v5&quot;&#125;;</code></pre></div>
+
+<p>pair在使用时很灵活，可以和多种容器一起使用，如何vector混合使用就可以保持图的到达关系列表</p>
+<div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;定义vector的类型为pair
+vector&lt;pair&lt;int, string&gt; &gt;v;
+&#x2F;&#x2F; 添加元素时可以使用
+v.push_back(pair&lt;int, string&gt;(2, &quot;value2&quot;));
+&#x2F;&#x2F; 或
+v.push_back(make_pair(3, &quot;value3&quot;));
+&#x2F;&#x2F; 或
+v.push_back(&#123;4, &quot;v5&quot;&#125;);</code></pre></div>
+
+<p>和set一起使用就可以把无向图的边关系进行去重保存</p>
+<p>==如果两个pair的first值和second值均相同时，则两个pair相等，在set中会被去重==</p>
+<h3 id="值访问与修改"><a href="#值访问与修改" class="headerlink" title="值访问与修改"></a>值访问与修改</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">pair&lt;int, string&gt;pa(1, &quot;value1&quot;);
+pa.first; &#x2F;&#x2F; 1;
+pa.second; &#x2F;&#x2F; &quot;value&quot;;
+&#x2F;&#x2F; 同时可以对键值进行修改
+pa.first &#x3D; 2;
+pa.second &#x3D; &quot;v2&quot;;</code></pre></div>
+
+
+
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>头文件<code>#include&lt;map&gt;</code></p>
+<p>提供键值对形式的结构</p>
+<h3 id="常用初始化"><a href="#常用初始化" class="headerlink" title="常用初始化"></a>常用初始化</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">map&lt;string, int&gt;ma; &#x2F;&#x2F; 初始化一个key为string类型，value为int类型的map
+map&lt;string, int&gt;ma &#x3D; &#123; &#x2F;&#x2F; 列表初始化只适用于c++11及以上，注意兼容
+    &#123;&quot;key1&quot;, 1&#125;,
+    &#123;&quot;key2&quot;, 2&#125;,
+    &#123;&quot;key3&quot;, 3&#125;
+&#125;
+&#x2F;&#x2F; 不支持c++11就只能手动初始化了
+map&lt;string, int&gt;ma; &#x2F;&#x2F; 创建声明
+ma[&quot;key1&quot;] &#x3D; 1;
+ma.insert(pair&lt;string, int&gt;(&quot;key2&quot;, 2));</code></pre></div>
+
+<h3 id="增-3"><a href="#增-3" class="headerlink" title="增"></a>增</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; map中不支持重复的key值，所以重复添加相同的key值项时，本质类同更新
+ma[&quot;key1&quot;] &#x3D; 1; &#x2F;&#x2F; 定义key值为&quot;key1&quot;，value为1的键值对
+ma.insert(pair&lt;string, int&gt;(&quot;key2&quot;, 2)); &#x2F;&#x2F; 使用pair插入</code></pre></div>
+
+<h3 id="删-3"><a href="#删-3" class="headerlink" title="删"></a>删</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ma.erase(key); &#x2F;&#x2F; 基于键值对key值删除一个键值对
+ma.clear(); &#x2F;&#x2F; 清空map内所以键值对</code></pre></div>
+
+<h3 id="查-2"><a href="#查-2" class="headerlink" title="查"></a>查</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ma.find(key); &#x2F;&#x2F; 返回对应key的迭代器，和ma.end()对比判断是否存在该键值对
+ma.count(key); &#x2F;&#x2F; 查找对应key的键值对数量，若为0则不存在该key值</code></pre></div>
+
+<h3 id="遍历-3"><a href="#遍历-3" class="headerlink" title="遍历"></a>遍历</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 通用方法，迭代器
+map&lt;string, int&gt;::iterator it;
+for (it &#x3D; ma.begin(); it !&#x3D; ma.end(); it++) &#123;
+    cout&lt;&lt;&quot;key&#x3D;&quot;&lt;&lt;it-&gt;first&lt;&lt;&quot;,value&#x3D;&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;
+&#125;
+&#x2F;&#x2F; 使用for in
+for (pair&lt;string, int&gt;pa : ma) &#123;
+    cout&lt;&lt;&quot;key&#x3D;&quot;&lt;&lt;pa.first&lt;&lt;&quot;,value&#x3D;&quot;&lt;&lt;pa.second&lt;&lt;endl;
+&#125;</code></pre></div>
+
+
+
+<h2 id="priority-queue⭐"><a href="#priority-queue⭐" class="headerlink" title="priority_queue⭐"></a><span id="priority_queue">priority_queue</span>⭐</h2><p>头文件为<code>#include&lt;queue&gt;</code>，和<a href="#queue">queue</a>一直，基本操作也类似，区别在于priority_queue优先队列可以设置数据的优先级，优先级高的可以先出队，其本质是用一个堆实现，常用与大根堆和小根堆的使用</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36888577/article/details/79937886">了解更多</a></p>
+<h3 id="初始化-2"><a href="#初始化-2" class="headerlink" title="初始化"></a>初始化</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 默认创建是大根堆
+priority_queue&lt;int&gt;pq;&#x2F;&#x2F; 等价于priority_queue&lt;int, vector&lt;int&gt;, less&lt;int&gt; &gt;pq;
+&#x2F;&#x2F; 小根堆
+priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt; &gt;pq;</code></pre></div>
+
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 对应基本数据，在插入元素后内部堆结构会自行进行调整
+&#x2F;&#x2F; 添加元素到队尾并排序
+pq.push(elem);
+pq.emplace(elem); &#x2F;&#x2F; 和push底层实现有点差异实际使用上作用一致
+&#x2F;&#x2F; 出队
+pq.pop();
+&#x2F;&#x2F; 访问队首
+pq.top();
+&#x2F;&#x2F; 队列大小
+pq.size();
+&#x2F;&#x2F; 判空
+pq.empty();</code></pre></div>
+
+<div style='border-left: 5px solid #0d93ea; padding: 10px;background: #eee; color: #555'>当存储数据为pair是会先比较first的值然后再比较second的值，若是要使用自定义的数据结构就需要重载相关操作符</div>
+
+
+<hr>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String不能算STL中的容器不过使用频率还是很高的，如果平时用的不是c++的话code的时候遇到还是会手生</p>
+<div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; 截取子串
+s.substr(pos, n); &#x2F;&#x2F; 截取[pos, pos+n)的子串，当不填n时默认截取到末尾
+&#x2F;&#x2F; 替换
+s.replace(pos, n, s1); &#x2F;&#x2F; 把[pos, pos+n)的子串换成s1
+&#x2F;&#x2F; 查找
+s.find(s1);					&#x2F;&#x2F;查找s中第一次出现s1的位置，并返回（包括0）
+string::size_type position;
+&#x2F;&#x2F;find 函数 返回jk 在s 中的下标位置
+position &#x3D; s.find(&quot;jk&quot;);
+bool isFind &#x3D; (position !&#x3D; s.npos);
+&#x2F;&#x2F;
+s.rfind(s1);				&#x2F;&#x2F;查找s中最后一次出现s1的位置，并返回（包括0）
+s.find_first_of(s1);		&#x2F;&#x2F;查找在s1中任意一个字符在s中第一次出现的位置，并返回（包括0）
+s.find_last_of(s1);			&#x2F;&#x2F;查找在s1中任意一个字符在s中最后一次出现的位置，并返回（包括0）
+s.find_first_not_of(s1);	&#x2F;&#x2F;查找s中第一个不属于s1中的字符的位置，并返回（包括0）
+s.find_last_not_of(s1);		&#x2F;&#x2F;查找s中最后一个不属于s1中的字符的位置，并返回（包括0）</code></pre></div>
+
+<p>字符串转数字</p>
+<div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">string s1 &#x3D; &quot;2147482&quot;, s2 &#x3D; &quot;-214748&quot;;
+string s3 &#x3D; &quot;214748666666663&quot;, s4 &#x3D; &quot;-21474836488&quot;;
+cout &lt;&lt; stoi(s1) &lt;&lt; endl;
+cout &lt;&lt; stoi(s2) &lt;&lt; endl;
+cout &lt;&lt; atoi(s3.c_str()) &lt;&lt; endl;
+cout &lt;&lt; atoi(s4.c_str()) &lt;&lt; endl;
+&#x2F;&#x2F; 也可以通过stringstream进行转换</code></pre></div>
+
+<p>数字转string</p>
+<div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F; c++ 11新特性
+int a &#x3D; 1;
+string as &#x3D; to_string(a);</code></pre></div>
+
+<h1 id="其他容器收录"><a href="#其他容器收录" class="headerlink" title="其他容器收录"></a>其他容器收录</h1><p>这部分收录主要是个人觉得不是很常用的一些容器相关API整理</p>
+<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a><span id="deque">deque</span></h2><p>头文件<code>#include &lt;deque&gt;</code></p>
+<p>双端队列，相比queue队列来说，双端队列两头都可以入队出队，也支持删除中间的元素</p>
+<h3 id="初始化-3"><a href="#初始化-3" class="headerlink" title="初始化"></a>初始化</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">deque&lt;int&gt; a; &#x2F;&#x2F; 定义一个int类型的双端队列a
+deque&lt;int&gt; a(10); &#x2F;&#x2F; 定义一个int类型的双端队列a，并设置初始大小为10
+deque&lt;int&gt; a(10, 1); &#x2F;&#x2F; 定义一个int类型的双端队列a，并设置初始大小为10且初始值都为1
+deque&lt;int&gt; b(a); &#x2F;&#x2F; 定义并用双端队列a初始化双端队列b
+deque&lt;int&gt; b(a.begin(), a.begin()+3); &#x2F;&#x2F; 将双端队列a中从第0个到第2个(共3个)作为双端队列b的初始值，当然此处也可以使用vector来进行初始化
+&#x2F;&#x2F; 使用数组进行初始化
+int n[] &#x3D; &#123; 1, 2, 3, 4, 5 &#125;;
+deque&lt;int&gt; a(n, n + 5); 
+deque&lt;int&gt; a(&amp;n[1], &amp;n[4]); &#x2F;&#x2F; 将n[1]、n[2]、n[3]作为双端队列a的初值
+</code></pre></div>
+
+<p>源<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="https://www.cnblogs.com/linuxandmcu/p/10260124.html
+">[1]</span></a></sup></p>
+<h3 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">de.push_back(elem); &#x2F;&#x2F; 从队尾入队
+de.push_front(elem); &#x2F;&#x2F; 从队头入队
+&#x2F;&#x2F; 任意位置插入一个元素
+deque&lt;int&gt;::iterator it &#x3D; de.begin();
+de.insert(it, 2);
+&#x2F;&#x2F; 任意位置插入n个相同元素
+de.insert(it, 3, 9); &#x2F;&#x2F; it为迭代器位置，插入3个9
+&#x2F;&#x2F; 也可以插入其他迭代器中间的一段数据
+de.insert(it, deq2.end() - 1, deq2.end());</code></pre></div>
+
+<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">de.pop_back(elem); &#x2F;&#x2F; 从队尾出队
+de.pop_front(elem); &#x2F;&#x2F; 从队头出队
+de.erase(iterator it); &#x2F;&#x2F; 删除迭代器位置的元素
+de.erase(iterator first, iterator last); &#x2F;&#x2F; 删除迭代器范围中的元素
+</code></pre></div>
+
+<h3 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">deq[1]; &#x2F;&#x2F; 下标访问
+deq.at(i); &#x2F;&#x2F; at方法访问
+deq.front(); &#x2F;&#x2F; 访问队首元素
+deq.back(); &#x2F;&#x2F; 访问队尾元素</code></pre></div>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">dep.size(); &#x2F;&#x2F; 大小
+deq.empty(); &#x2F;&#x2F; 判断空</code></pre></div>
+
+
+
+<h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a><span id="multiset">multiset</span></h2><p>头文件<code>#include &lt;set&gt;</code>和set在使用上大概一直，主要的区别在于set不允许重复的元素而multiset支持</p>
+<p>相关初始化和使用方法如<a href="#set">set</a>一致</p>
+<p>另外在使用<code>count()</code>方法时因为multiset允许重复元素，因此count方法将会返回元素的个数</p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linuxandmcu/p/10260124.html">https://www.cnblogs.com/linuxandmcu/p/10260124.html</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/63568.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C++常用的算法库(algorithm)</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/10465.html">
+                        <span class="hidden-mobile">学习资源</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+      <script  src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js" ></script>
+      <script  src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js" ></script>
+      
+        <script  src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+      
+    
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>
